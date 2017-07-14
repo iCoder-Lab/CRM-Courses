@@ -82,7 +82,7 @@ NewsUploadPhoto
     "endDate": String, 
     "teacherId": Int,
     "teacherName" : String,
-    "price": String,
+    "price": Int,
     "notes": String
     
 ### News 
