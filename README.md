@@ -3,7 +3,34 @@
 upload news to existing News oby its ID, sent base64 data. return then url of image. 
 NewsUploadPhoto
 
-Models: 
+
+
+
+
+# POST Requests
+
+   * /addTeacher (Teacher)
+   * /addStudent (Student)
+   * /addCourse (Course)
+   * /addClass (Class)
+   * /addNews (News)
+   * /adminNotificate (AdminNotification)
+   * /teacherNotificate (TeacherNotification)
+   * /addHomework (Homework)
+   * /submitHomeWork (HomeworkSubmition) then upload image to HomeworkSubmitionId
+   * /approveStudentAttandence
+   
+# GET Requests
+
+   * /getNews -> Array < News >
+   * /getCourses -> Array < Course >
+   * /getClasses -> Array < Class >
+   * /getStudentsInClass/{classId} -> Array < Student >
+   * /getStudentAttandace/{studentId} -> Array < Attandance >
+   * /getHomeworks/{classId} -> Array < HomeWork >
+   * getAllTeachers -> Array <Teacher>
+   
+# Models: 
 
 ### Teacher
     "id": Int,
@@ -25,11 +52,13 @@ Models:
     "mobilePhone": String  //0XXXyyyyyy
     "email": String 
     "classId": Int //
+    "deviceId": String
 
 ### Course
     "id": Int
     "name": String,
     "description": String
+    
 ### Class
     "id": Int
     "courseId": Int,
@@ -57,7 +86,38 @@ Models:
     "title": Int,
     "description: String,
     
-### HomeworkSubmition
+    
+### QrCode 
+    "qrcode" : String
+    
+### HomeworkSubmition   
+    "id": Int,
+    "homeworkId": Int,
+    "studentId": String,
+    "classId": Int
+    "title": String,
+    "description": String
+    
+    //upload photo by homeworkSubmissionId 
+    
 ### Attandance
-### ChatGroup
-### 
+    "studentId": Int,
+    "classId": Int,
+    "datetime" : String,
+    "isAttended" : Bool
+    
+### AdminNotification
+    "title": Stirng,
+    "description" : String,
+    "isToTeachers": Bool,
+    "isToStudents": Bool,
+    "isToGuests": Bool
+    
+### TeacherNotification 
+
+    "classId": Int
+    "title": String,
+    "description": String
+    
+### StudentAttandance
+    "code": String // this string includes encription of data: StudentId, ClassId, currentTime released on server side
