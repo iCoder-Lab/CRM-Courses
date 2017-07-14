@@ -3,10 +3,6 @@
 upload news to existing News oby its ID, sent base64 data. return then url of image. 
 NewsUploadPhoto
 
-
-
-
-
 # POST Requests
 
    * /addTeacher (Teacher)
@@ -18,7 +14,14 @@ NewsUploadPhoto
    * /teacherNotificate (TeacherNotification)
    * /addHomework (Homework)
    * /submitHomeWork (HomeworkSubmition) then upload image to HomeworkSubmitionId
-   * /approveStudentAttandence
+   * /approveStudentAttandence (QrCode)
+   * /changeTeacherPassword ()
+   
+   ### metadata
+   
+   //We should try this inidividually
+   * /uploadHomeworkImage/{HomeworkSubmitionId}
+   * /uploadNewsImage/{newsId}
    
 # GET Requests
 
@@ -28,7 +31,12 @@ NewsUploadPhoto
    * /getStudentsInClass/{classId} -> Array < Student >
    * /getStudentAttandace/{studentId} -> Array < Attandance >
    * /getHomeworks/{classId} -> Array < HomeWork >
-   * getAllTeachers -> Array <Teacher>
+   * /getAllTeachers -> Array <Teacher>
+   * /getHomeworkSubmissions/{homeworkId} -> Array <HomeworkSubmition>
+   
+   ### metadata 
+   * /getStudentQrCode -> ??? Image encopded in base64 need for test 
+      
    
 # Models: 
 
@@ -40,19 +48,21 @@ NewsUploadPhoto
     "birthDate": String,
     "education": String,
     "awards": String,
-    "startWorkingDate": String //timestamp 
-    "mobilePhone": String  //0XXXyyyyyy
-    "email": String 
-    "about" : String
+    "startWorkingDate": String, //timestamp 
+    "mobilePhone": String,  //0XXXyyyyyy
+    "email": String, 
+    "about" : String,
 
 ### Student
     "id": String,
     "name": String,
     "surname": String,
     "mobilePhone": String  //0XXXyyyyyy
-    "email": String 
-    "classId": Int //
-    "deviceId": String
+    "email": String, 
+    "classId": Int,
+    "deviceId": String,
+    "login": String,
+    "password": String
 
 ### Course
     "id": Int
@@ -88,7 +98,7 @@ NewsUploadPhoto
     
     
 ### QrCode 
-    "qrcode" : String
+    "qrcode" : String // this string includes encription of data: StudentId, ClassId, currentTime released on server side
     
 ### HomeworkSubmition   
     "id": Int,
@@ -97,7 +107,7 @@ NewsUploadPhoto
     "classId": Int
     "title": String,
     "description": String
-    
+    "imagePath": String //only fot get methods
     //upload photo by homeworkSubmissionId 
     
 ### Attandance
@@ -107,6 +117,7 @@ NewsUploadPhoto
     "isAttended" : Bool
     
 ### AdminNotification
+
     "title": Stirng,
     "description" : String,
     "isToTeachers": Bool,
@@ -119,5 +130,13 @@ NewsUploadPhoto
     "title": String,
     "description": String
     
-### StudentAttandance
-    "code": String // this string includes encription of data: StudentId, ClassId, currentTime released on server side
+### PasswordReset 
+    "login" : String,
+    "oldPassword": String,
+    "newPassword": String
+    
+### StudentAuthCredentials
+    "login": String,
+    "password": string,
+    
+    
