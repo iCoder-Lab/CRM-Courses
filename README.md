@@ -1,27 +1,34 @@
 # CRM-Courses
 
-upload news to existing News oby its ID, sent base64 data. return then url of image. 
+## Server side notes
+
+* upload news to existing News oby its ID, sent base64 data. return then url of image. 
 NewsUploadPhoto
+
+* after addStudent request you create student and generate promoCode for him. This promoCode then should be send to User's email. 
+
+
 
 # POST Requests
 
-   * /addTeacher (Teacher)
-   * /addStudent (Student)
-   * /addCourse (Course)
-   * /addClass (Class)
-   * /addNews (News)
-   * /adminNotificate (AdminNotification)
-   * /teacherNotificate (TeacherNotification)
-   * /addHomework (Homework)
-   * /submitHomeWork (HomeworkSubmition) then upload image to HomeworkSubmitionId
-   * /approveStudentAttandence (QrCode)
-   * /changeTeacherPassword ()
+   * /addTeacher (Teacher) -> ErrorMessage
+   * /addStudent (Student) -> ErrorMessage
+   * /addCourse (Course) -> ErrorMessage
+   * /addClass (Class) -> ErrorMessage
+   * /addNews (News) -> ErrorMessage
+   * /adminNotificate (AdminNotification) -> ErrorMessage
+   * /teacherNotificate (TeacherNotification) -> ErrorMessage
+   * /addHomework (Homework) -> ErrorMessage
+   * /submitHomeWork (HomeworkSubmition) -> ErrorMessage 
+   * /approveStudentAttandence (QrCode) -> ErrorMessage
+   * /activatePromoCode (PromoCode) -> Student +  ErrorMessage
+   * /setStudentNewAuth (StudentAuthCredentials) -> ErrorMessage
    
    ### metadata
    
    //We should try this inidividually
-   * /uploadHomeworkImage/{HomeworkSubmitionId}
-   * /uploadNewsImage/{newsId}
+   * /uploadHomeworkImage/{HomeworkSubmitionId} -> ErrorMessage
+   * /uploadNewsImage/{newsId} -> ErrorMessage
    
 # GET Requests
 
@@ -59,10 +66,7 @@ NewsUploadPhoto
     "surname": String,
     "mobilePhone": String  //0XXXyyyyyy
     "email": String, 
-    "classId": Int,
-    "deviceId": String,
-    "login": String,
-    "password": String
+    "classId": Int
 
 ### Course
     "id": Int
@@ -133,10 +137,19 @@ NewsUploadPhoto
 ### PasswordReset 
     "login" : String,
     "oldPassword": String,
-    "newPassword": String
+    "newPassword": String,
+    "deviceId": String
     
 ### StudentAuthCredentials
-    "login": String,
+    "studentId": Int,
+    "login": String, //check for existing login
     "password": string,
+    
+### PromoCode 
+    "promocode" : String
+    "deviceId" : Stirng
+    
+### ErrorMessage
+    "error": String
     
     
